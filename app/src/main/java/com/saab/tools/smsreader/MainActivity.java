@@ -4,6 +4,8 @@ import android.Manifest;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,12 +38,17 @@ public class MainActivity extends AppCompatActivity implements SmsListener {
         Log.i(TAG, "Ensuring necessary permissions...");
         PermissionUtils.ensurePermissionsAreGranted(this, Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS);
 
+        Log.i(TAG, "Initializing AWS AppSync client...");
         mAWSAppSyncClient = AWSAppSyncClient.builder()
                 .context(getApplicationContext())
                 .awsConfiguration(new AWSConfiguration(getApplicationContext()))
                 .build();
 
+        Log.i(TAG, "Flagging the MainActivity to listen to SMSs...");
         MessageReceiver.setListener(this);
+
+        // TODO terminar esse tutorial para listar todos os SMSs aqui e adicionar uma acao no botao SYNC ALL
+        // https://www.sitepoint.com/starting-android-development-creating-todo-app/
     }
 
     /**
@@ -57,6 +64,25 @@ public class MainActivity extends AppCompatActivity implements SmsListener {
                                            String permissions[], int[] grantResults) {
         Log.i(TAG, String.format("Permissions request response: [permissions=%s, results=%]", permissions, grantResults));
         PermissionUtils.handleRequestPermissionResults(this, requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_sync_all:
+                Log.i(TAG, "Sync all SMSs");
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**
