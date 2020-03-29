@@ -1,0 +1,6 @@
+type Sms @model {
+  id: ID!
+  date: Float!
+  number: String
+  message: String!
+}

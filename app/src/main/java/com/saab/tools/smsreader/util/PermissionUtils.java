@@ -8,7 +8,6 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PermissionUtils {

@@ -8,9 +8,17 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.widget.Toast;
+import android.util.Log;
 
 public class MessageReceiver extends BroadcastReceiver {
+
+    private static final String TAG = MessageReceiver.class.getSimpleName();
+
+    private static SmsListener listener;
+
+    public static void setListener(SmsListener listener) {
+        MessageReceiver.listener = listener;
+    }
 
     @Override
     @SuppressLint("DefaultLocale")
@@ -21,16 +29,15 @@ public class MessageReceiver extends BroadcastReceiver {
 
         for (int i = 0; i < pdus.length; i++) {
             SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
-            String message = String.format("Sender: %s, Email From: %s, Email body: %s, " +
-                            "Display message body: %s, Time in millisecond: %d, Message: %s",
-                    smsMessage.getDisplayOriginatingAddress(),
-                    smsMessage.getEmailFrom(),
-                    smsMessage.getEmailBody(),
-                    smsMessage.getDisplayMessageBody(),
-                    smsMessage.getTimestampMillis(),
-                    smsMessage.getMessageBody());
+            Log.i(TAG, "Received new SMS message: " + smsMessage.toString());
 
-            Toast.makeText(context, "Received message: " + message, Toast.LENGTH_SHORT).show();
+            if (listener != null) {
+                Log.i(TAG, "Invoking message listener...");
+                listener.newSms(smsMessage);
+                Log.i(TAG, "Message listener invoked!");
+            } else {
+                Log.i(TAG, "No message listener configured!");
+            }
         }
     }
 

@@ -1,0 +1,34 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateSms(
+  $input: CreateSmsInput!
+  $condition: ModelSmsConditionInput
+) {
+  createSms(input: $input, condition: $condition) {
+    id
+    date
+    number
+    message
+  }
+}
+mutation UpdateSms(
+  $input: UpdateSmsInput!
+  $condition: ModelSmsConditionInput
+) {
+  updateSms(input: $input, condition: $condition) {
+    id
+    date
+    number
+    message
+  }
+}
+mutation DeleteSms(
+  $input: DeleteSmsInput!
+  $condition: ModelSmsConditionInput
+) {
+  deleteSms(input: $input, condition: $condition) {
+    id
+    date
+    number
+    message
+  }
+}
