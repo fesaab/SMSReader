@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:paddingBottom="10px"
+    android:paddingLeft="10px"
+    android:paddingRight="10px"
+    android:paddingTop="10px">
 
     <ListView
+        android:id="@+id/list_sms"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="1dp"
