@@ -3,6 +3,7 @@ package com.saab.tools.smsreader.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class PermissionUtils {
 
+    private static final String TAG = PermissionUtils.class.getSimpleName();
     private static final int PERMISSION_REQUEST_CODE = 1;
 
     public static boolean hasPermission(Context context, String permission) {
@@ -24,22 +26,27 @@ public class PermissionUtils {
     public static void ensurePermissionsAreGranted(Activity activity, String... permissions) {
         // Check if any permission is missing
         List<String> missingPermissions = new ArrayList<>();
+        List<String> alreadyGrantedPermissions = new ArrayList<>();
         for (String permission : permissions) {
             if (!hasPermission(activity, permission)) {
                 missingPermissions.add(permission);
+            } else {
+                alreadyGrantedPermissions.add(permission);
             }
         }
 
+        Log.i(TAG, String.format("Missing permissions=[%s], Already granted permissions=[%s]",
+                String.join(",", missingPermissions),
+                String.join(",", alreadyGrantedPermissions)));
+
         // If so, request the permissions
         if (!missingPermissions.isEmpty()) {
-            Toast.makeText(activity, "Requesting permissions to " + String.join(",", missingPermissions),
-                    Toast.LENGTH_SHORT).show();
+            Log.i(TAG, String.format("Requesting permissions to [%s]", String.join(",", missingPermissions)));
             ActivityCompat.requestPermissions(activity,
                     missingPermissions.toArray(new String[missingPermissions.size()]),
                     PERMISSION_REQUEST_CODE);
         } else {
-            Toast.makeText(activity, "Permissions already granted to " + String.join(",", missingPermissions),
-                    Toast.LENGTH_SHORT).show();
+            Log.i(TAG, String.format("Permissions already granted to [%s]", String.join(",", alreadyGrantedPermissions)));
         }
     }
 
@@ -69,6 +76,7 @@ public class PermissionUtils {
                 message.append(String.format("Denied permissions: %s. ", String.join(",", deniedPermissions)));
             }
 
+            Log.i(TAG, message.toString());
             Toast.makeText(activity, message.toString(), Toast.LENGTH_SHORT).show();
         }
 

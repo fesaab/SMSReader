@@ -3,9 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_sync_all"
+        android:id="@+id/action_search_all"
         android:icon="@android:drawable/ic_menu_rotate"
-        android:title="Sync All"
+        android:title="Search All SMSs"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_sync_all"
+        android:icon="@android:drawable/ic_menu_upload"
+        android:title="Sync All SMSs"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_reset_all"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="Clean Sync"
         app:showAsAction="always" />
 
 </menu>

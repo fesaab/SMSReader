@@ -1,6 +1,6 @@
 # SMS Reader
 
-Android app that listen to incoming SMS messages and send bank messages to the cloud.
+Android app that listen to incoming SMS messages and send specific messages to the cloud.
 
 ## AWS
 
@@ -15,5 +15,8 @@ amplify configure
 amplify push
 ```
 
-### Reference
-https://aws-amplify.github.io/docs/sdk/android/start?ref=amplify-android-btn
+### References
+- https://aws-amplify.github.io/docs/sdk/android/start?ref=amplify-android-btn
+- https://www.sitepoint.com/starting-android-development-creating-todo-app/
+- https://dev.materialdesignicons.com/getting-started/android
+- https://materialdesignicons.com/
