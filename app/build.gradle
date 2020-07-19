@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.amazonaws.appsync'
+ apply plugin: 'com.amazonaws.appsync'
 
 android {
     compileSdkVersion 29
@@ -38,13 +38,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //Base SDK
-    implementation 'com.amazonaws:aws-android-sdk-core:2.15.+'
+    implementation 'com.amazonaws:aws-android-sdk-core:2.16.13'
     //AppSync SDK
-    implementation 'com.amazonaws:aws-android-sdk-appsync:2.8.+'
+    implementation 'com.amazonaws:aws-android-sdk-appsync:3.1.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
 
-    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
 
     // Lombok
     compileOnly 'org.projectlombok:lombok:1.18.12'

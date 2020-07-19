@@ -5,11 +5,14 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
-        classpath 'com.amazonaws:aws-android-sdk-appsync-gradle-plugin:2.9.+'
+        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.amazonaws:aws-android-sdk-appsync-gradle-plugin:3.1.0'
+        classpath "com.github.node-gradle:gradle-node-plugin:2.2.4"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
