@@ -153,6 +153,32 @@ public class SmsListViewHelper {
         });
     }
 
+    /**
+     * Reset one single SMS so it can be synced again.
+     *
+     * @param view
+     */
+    public void resetButtonOnClick(View view) {
+        Sms sms = (Sms) view.getTag();
+        new AlertDialog.Builder(activity)
+                .setMessage("Are you sure you want to reset the sync state of this message?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.i(TAG, "Reseting all SMSs...");
+                        smsRepository.resetSync(sms);
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateUI();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
     public void resetAllSmss() {
         new AlertDialog.Builder(activity)
                 .setMessage("Are you sure you want to reset the sync state?")

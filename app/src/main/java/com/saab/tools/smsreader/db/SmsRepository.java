@@ -133,7 +133,7 @@ public class SmsRepository {
     }
 
     public void resetSync() {
-        Log.i(TAG, "Reseting the sync of all SMSs on DB: ");
+        Log.i(TAG, "Reseting the sync of all SMSs on DB");
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -143,6 +143,21 @@ public class SmsRepository {
                 values,
                 SmsDbEntry.COL_SMS_SYNCED + " = ?",
                 new String[]{"1"},
+                SQLiteDatabase.CONFLICT_REPLACE);
+        db.close();
+    }
+
+    public void resetSync(Sms sms) {
+        Log.i(TAG, "Reseting the sync of the SMS " + sms.getId() + " on DB");
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SmsDbEntry.COL_SMS_SYNCED, "0");
+        values.put(SmsDbEntry.COL_SMS_SYNCED_MSG, "");
+        db.updateWithOnConflict(SmsDbEntry.TABLE,
+                values,
+                SmsDbEntry.COL_SMS_ID + " = ?",
+                new String[]{sms.getId()},
                 SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
     }

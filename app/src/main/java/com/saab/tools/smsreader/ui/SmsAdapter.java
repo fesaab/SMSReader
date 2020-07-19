@@ -44,6 +44,14 @@ public class SmsAdapter extends ArrayAdapter<Sms> {
         TextView textMessage = convertView.findViewById(R.id.sms_message);
         textMessage.setText(sms.getMessage());
 
+        // Handle the buttons
+        handleSyncButton(convertView, sms);
+        handleResetButton(convertView, sms);
+
+        return convertView;
+    }
+
+    private void handleSyncButton(@Nullable View convertView, Sms sms) {
         // Link this object with it's respective button
         Button syncButton = (Button) convertView.findViewById(R.id.sms_button);
         syncButton.setTag(sms);
@@ -74,7 +82,25 @@ public class SmsAdapter extends ArrayAdapter<Sms> {
                     .build();
             syncButton.setCompoundDrawables(image, null, null, null);
         }
+    }
 
-        return convertView;
+    private void handleResetButton(@Nullable View convertView, Sms sms) {
+        // Link this object with it's respective button
+        Button resetButton = (Button) convertView.findViewById(R.id.sms_reset);
+        resetButton.setTag(sms);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                smsListViewHelper.resetButtonOnClick(v);
+            }
+        });
+
+        // Set the image
+        Drawable image = MaterialDrawableBuilder.with(getContext())
+                .setIcon(MaterialDrawableBuilder.IconValue.CLOUD_SYNC)
+                .setColor(Color.WHITE)
+                .setToActionbarSize()
+                .build();
+        resetButton.setCompoundDrawables(image, null, null, null);
     }
 }

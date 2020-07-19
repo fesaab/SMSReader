@@ -42,12 +42,15 @@ public class MessageReceiver extends BroadcastReceiver {
 
                     // At this point we don't have the "id" from the SMS so we cannot create it on DB =(
                     shouldRefreshUi = true;
+                    break;
                 }
             }
 
             // Search for the new SMSs and save them on DB
-            if (shouldRefreshUi)
+            if (shouldRefreshUi) {
                 smsListViewHelper.searchNewSmss();
+                smsListViewHelper.syncPendingSmss();
+            }
 
         } else {
             Log.i(TAG, "Message received but not processed because the MessageReceiver was not initialized!");
