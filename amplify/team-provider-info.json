@@ -11,5 +11,18 @@
             "StackId": "arn:aws:cloudformation:us-east-1:689243596060:stack/amplify-smsreader-dev-95746/fd8e3260-7192-11ea-a4c1-0a8267cebc39",
             "AmplifyAppId": "d3v3yvlmuad6cu"
         }
+    },
+    "prod": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-smsreader-prod-162516-authRole",
+            "UnauthRoleArn": "arn:aws:iam::689243596060:role/amplify-smsreader-prod-162516-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::689243596060:role/amplify-smsreader-prod-162516-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-smsreader-prod-162516-deployment",
+            "UnauthRoleName": "amplify-smsreader-prod-162516-unauthRole",
+            "StackName": "amplify-smsreader-prod-162516",
+            "StackId": "arn:aws:cloudformation:us-east-1:689243596060:stack/amplify-smsreader-prod-162516/8ec4cf40-2cce-11eb-abcb-12bf92df32e3",
+            "AmplifyAppId": "d2xhlsv4wva2ly"
+        }
     }
 }
