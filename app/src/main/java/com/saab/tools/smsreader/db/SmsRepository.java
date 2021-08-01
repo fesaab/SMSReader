@@ -43,9 +43,11 @@ public class SmsRepository {
                     .dateTime(cursor.getLong(3))
                     .build();
 
-            if (sms.getMessage().startsWith(Constants.SMS_PREFIX_NEDBANK)) {
-                Log.i(TAG, String.format("Sms=[%s]", sms.toString()));
-                smsList.add(sms);
+            for (String smsBodyItau : Constants.SMS_CONTAINS_ITAU) {
+                if (sms.getMessage().contains(smsBodyItau)) {
+                    Log.i(TAG, String.format("Sms=[%s]", sms.toString()));
+                    smsList.add(sms);
+                }
             }
         }
 

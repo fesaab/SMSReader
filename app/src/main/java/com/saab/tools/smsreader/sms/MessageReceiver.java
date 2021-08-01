@@ -38,11 +38,13 @@ public class MessageReceiver extends BroadcastReceiver {
                 SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdu);
                 Log.i(TAG, "Received new SMS message: " + smsMessage.toString());
 
-                if (smsMessage.getMessageBody().startsWith(Constants.SMS_PREFIX_NEDBANK)) {
+                for (String smsBodyItau : Constants.SMS_CONTAINS_ITAU) {
+                    if (smsMessage.getMessageBody().contains(smsBodyItau)) {
 
-                    // At this point we don't have the "id" from the SMS so we cannot create it on DB =(
-                    shouldRefreshUi = true;
-                    break;
+                        // At this point we don't have the "id" from the SMS so we cannot create it on DB =(
+                        shouldRefreshUi = true;
+                        break;
+                    }
                 }
             }
 
